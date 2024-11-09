@@ -1,0 +1,103 @@
+/* Estilos básicos del menú */
+.autonav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+}
+
+.autonav__item {
+    position: relative;
+}
+
+.autonav__link {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
+}
+
+.autonav__link:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+/* Dropdown */
+.autonav__dropdown {
+    list-style: none;
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.autonav__item:hover .autonav__dropdown {
+    display: block;
+}
+
+.autonav__dropdown-link {
+    text-decoration: none;
+    color: #555;
+    padding: 8px 12px;
+    display: block;
+}
+
+.autonav__dropdown-link:hover {
+    background-color: #f0f0f0;
+    color: #000;
+}
+
+/* Header Styles */
+.nist-header {
+    background: #000;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 10px 16px 0;
+    font-size: 16px;
+}
+
+.nist-header__logo-link {
+    display: inline-block;
+    height: 35px;
+}
+
+/* For Bootstrap Users - Updated the vertical align property since it interfered with NIST SVG icon. */
+.nist-header__logo-link svg {
+    vertical-align: inherit;
+}
+
+.nist-header__logo-icon {
+    fill: #fff;
+    display: inline-block;
+    height: 16px;
+    position: relative;
+    top: -2px;
+    margin-right: 2px;
+}
+
+.nist-header__logo-image {
+    fill: #fff;
+    display: inline-block;
+    height: 24px;
+    width: 90px;
+}
+
+/* Limit main content area width */
+.nist-main {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    padding: 0 16px;
+    box-sizing: border-box;
+}
+
+/* Make sure body has no margin or padding when using only this header component */
+body {
+    padding: 0;
+    margin: 0;
+}
