@@ -1,0 +1,20 @@
+<!-- Mostrar mensaje de error si existe -->
+<div *ngIf="errorMessage" class="error">
+    <p>{{ errorMessage }}</p>
+  </div>
+  
+  <!-- Mostrar lista de catálogos si existen -->
+  <div *ngIf="catalogos.length > 0">
+    <h2>Catálogos:</h2>
+    <ul>
+      <li *ngFor="let catalogo of catalogos">
+        {{ catalogo.nombre }} <!-- Mostrar el nombre de cada catálogo -->
+      </li>
+    </ul>
+  </div>
+  
+  <!-- Si no hay catálogos disponibles y no hay mensaje de error -->
+  <div *ngIf="catalogos.length === 0 && !errorMessage">
+    <p>No hay catálogos disponibles.</p>
+  </div>
+  
