@@ -1,56 +1,104 @@
-/* Estilo general para la tabla */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Encabezado de la tabla */
-  thead {
-    background-color: #4CAF50;
-    color: white;
-  }
-  
-  th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border: 1px solid #ddd;
-  }
-  
-  /* Filas de la tabla */
-  tbody tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  tbody tr:hover {
-    background-color: #e0f7fa;
-  }
-  
-  /* Texto de las celdas */
-  td {
-    font-size: 14px;
-    color: #333;
-  }
-  
-  /* Encabezado */
-  h2 {
-    color: #333;
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  /* Ajustes de la tabla en pantallas pequeñas */
-  @media (max-width: 768px) {
-    table {
-      font-size: 12px;
-    }
-  
-    th, td {
-      padding: 10px;
-    }
-  }
-  
+/* Estilo para el mensaje de error */
+.error {
+  color: red;
+  background-color: #f8d7da;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+/* Contenedor de formularios */
+.form-container {
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Estilo para los formularios */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin: 10px 0 5px;
+  font-weight: bold;
+}
+
+form input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.submit-btn, .cancel-btn, .action-btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-btn {
+  background-color: #28a745;
+  color: white;
+}
+
+.submit-btn:hover {
+  background-color: #218838;
+}
+
+.cancel-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #c82333;
+}
+
+.action-btn {
+  margin-right: 10px;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.update-btn {
+  background-color: #ffc107;
+  color: black;
+}
+
+.update-btn:hover {
+  background-color: #e0a800;
+}
+
+/* Tabla de catálogos */
+.catalog-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.catalog-table th, .catalog-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.catalog-table th {
+  background-color: #f1f1f1;
+  font-weight: bold;
+}
+
+.catalog-table tr:hover {
+  background-color: #f5f5f5;
+}

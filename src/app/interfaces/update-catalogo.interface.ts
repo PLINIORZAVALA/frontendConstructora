@@ -1,10 +1,8 @@
-// Interfaz para actualizar un catálogo
 export interface UpdateCatalogo {
-    id: number;
+    id: number;         // Asegúrate de incluir 'id' aquí
     nombre: string;
     tipo: string;
     descripcion: string;
     imagen: string;
-    // Otros campos según la estructura del catálogo
   }
   

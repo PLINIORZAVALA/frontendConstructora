@@ -1,33 +1,82 @@
 <!-- Mostrar mensaje de error si existe -->
 <div *ngIf="errorMessage" class="error">
-    <p>{{ errorMessage }}</p>
-  </div>
-  
-  <!-- Mostrar lista de catálogos si existen -->
-  <div *ngIf="catalogos.length > 0">
-    <h2>Catálogos:</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Tipo</th>
-          <th>Descripción</th>
-          <th>Imagen</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let catalogo of catalogos">
-          <td>{{ catalogo.nombre }}</td>
-          <td>{{ catalogo.tipo }}</td>
-          <td>{{ catalogo.descripcion }}</td>
-          <td>{{ catalogo.imagen }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
-  <!-- Si no hay catálogos disponibles y no hay mensaje de error -->
-  <div *ngIf="catalogos.length === 0 && !errorMessage">
-    <p>No hay catálogos disponibles.</p>
-  </div>
-  
+  <p>{{ errorMessage }}</p>
+</div>
+
+<!-- Formulario para crear un nuevo catálogo -->
+<div class="form-container">
+  <h2>Crear Nuevo Catálogo:</h2>
+  <form (ngSubmit)="crearCatalogo()">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" [(ngModel)]="nuevoCatalogo.nombre" name="nombre" required>
+
+    <label for="tipo">Tipo:</label>
+    <input id="tipo" [(ngModel)]="nuevoCatalogo.tipo" name="tipo" required>
+
+    <label for="descripcion">Descripción:</label>
+    <input id="descripcion" [(ngModel)]="nuevoCatalogo.descripcion" name="descripcion" required>
+
+    <label for="imagen">Imagen:</label>
+    <input id="imagen" [(ngModel)]="nuevoCatalogo.imagen" name="imagen" required>
+
+    <button type="submit" class="submit-btn">Crear Catálogo</button>
+  </form>
+</div>
+
+<!-- Formulario para actualizar un catálogo, solo se muestra si un catálogo está seleccionado -->
+<div *ngIf="catalogoSeleccionado" class="form-container">
+  <h2>Actualizar Catálogo:</h2>
+  <form (ngSubmit)="actualizarCatalogo()">
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" [(ngModel)]="catalogoSeleccionado.nombre" name="nombre" required>
+
+    <label for="tipo">Tipo:</label>
+    <input id="tipo" [(ngModel)]="catalogoSeleccionado.tipo" name="tipo" required>
+
+    <label for="descripcion">Descripción:</label>
+    <input id="descripcion" [(ngModel)]="catalogoSeleccionado.descripcion" name="descripcion" required>
+
+    <label for="imagen">Imagen:</label>
+    <input id="imagen" [(ngModel)]="catalogoSeleccionado.imagen" name="imagen" required>
+
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">Actualizar Catálogo</button>
+      <button type="button" class="cancel-btn" (click)="cancelarActualizacion()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
+<!-- Mostrar lista de catálogos si existen -->
+<div *ngIf="catalogos.length > 0">
+  <h2>Catálogos:</h2>
+  <table class="catalog-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Tipo</th>
+        <th>Descripción</th>
+        <th>Imagen</th>
+        <th>Acciones</th> <!-- Columna para las acciones (eliminar y actualizar) -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let catalogo of catalogos">
+        <td>{{ catalogo.nombre }}</td>
+        <td>{{ catalogo.tipo }}</td>
+        <td>{{ catalogo.descripcion }}</td>
+        <td>{{ catalogo.imagen }}</td>
+        <td>
+          <!-- Botón de eliminar -->
+          <button (click)="eliminarCatalogo(catalogo.id ?? 0)" class="action-btn delete-btn">Eliminar</button>
+          <!-- Botón de actualizar -->
+          <button (click)="mostrarFormularioActualizar(catalogo)" class="action-btn update-btn">Actualizar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Si no hay catálogos disponibles y no hay mensaje de error -->
+<div *ngIf="catalogos.length === 0 && !errorMessage">
+  <p>No hay catálogos disponibles.</p>
+</div>

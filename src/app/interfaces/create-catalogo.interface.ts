@@ -1,8 +1,7 @@
-// Interfaz para crear un catálogo
 export interface CreateCatalogo {
+  id?: number;  // Hacer que id sea opcional
   nombre: string;
   tipo: string;
   descripcion: string;
   imagen: string;
-  // Otros campos según la estructura del catálogo
 }
