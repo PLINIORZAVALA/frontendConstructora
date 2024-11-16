@@ -1,27 +1,44 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Catalogo } from '../interfaces/create-catalogo.interface';
+import { CreateCatalogo } from '../interfaces/create-catalogo.interface'; // Importar las interfaces
+import { UpdateCatalogo } from '../interfaces/update-catalogo.interface';
+import { DeleteCatalogo } from '../interfaces/delete-catalogo.interface';
 
 @Injectable({
-  providedIn: 'root'  // Esto indica que el servicio está disponible globalmente en la aplicación
+  providedIn: 'root',
 })
-export class SevicesService {
-  // Almacenamos la llamada de la dirección URL
-  private apiURL = 'http://localhost:3000/catalogos';
+export class CatalogosService {
+  private _baseUrl = 'http://localhost:3000/'; // Base URL para tu backend
 
-  // Creamos el constructor para que obtenga los datos de la URL
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
 
-  // Realizamos la petición get desde el Backend
-  getCatalogo(): Observable<Catalogo[]> {
-    return this.http.get<Catalogo[]>(this.apiURL).pipe(
-      catchError(error => {
-        console.error('Error en la petición:', error);
-        return throwError(() => new Error('Error en la petición HTTP'));
-      })
-    );
+  constructor() {}
+
+  // Obtener todos los catálogos
+  getCatalogos(): Observable<CreateCatalogo[]> {
+    return this.http.get<CreateCatalogo[]>(`${this._baseUrl}api/catalogos/getAll`);
+  }
+
+  // Obtener un catálogo por ID
+  getCatalogoById(id: number): Observable<CreateCatalogo> {
+    return this.http.get<CreateCatalogo>(`${this._baseUrl}api/catalogos/getById/${id}`);
+  }
+
+  // Crear un nuevo catálogo
+  postCatalogo(nuevoCatalogo: CreateCatalogo): Observable<CreateCatalogo> {
+    return this.http.post<CreateCatalogo>(`${this._baseUrl}api/catalogos/create`, nuevoCatalogo);
+  }
+
+  // Actualizar un catálogo
+  putCatalogo(id: number, catalogo: UpdateCatalogo): Observable<CreateCatalogo> {
+    return this.http.put<CreateCatalogo>(`${this._baseUrl}api/catalogos/update/${id}`, catalogo);
+  }
+
+  // Eliminar un catálogo
+  deleteCatalogo(id: number): Observable<DeleteCatalogo> {
+    return this.http.delete<DeleteCatalogo>(`${this._baseUrl}api/catalogos/delete/${id}`);
   }
 }

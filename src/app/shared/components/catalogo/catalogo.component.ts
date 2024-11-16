@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { SevicesService } from '../../../services/sevices.service';
-import { Catalogo } from '../../../interfaces/create-catalogo.interface';
+import { CatalogosService } from '../../../services/sevices.service';
+import { CreateCatalogo } from '../../../interfaces/create-catalogo.interface';
 
 @Component({
   selector: 'app-catalogo',
@@ -13,17 +13,17 @@ import { Catalogo } from '../../../interfaces/create-catalogo.interface';
 })
 
 export class CatalogoComponent implements OnInit {
-  catalogos: Catalogo[] = [];  // Variable para almacenar los datos
+  catalogos: CreateCatalogo[] = [];  // Variable para almacenar los datos
   errorMessage: string = '';    // Variable para manejar errores
 
-  constructor(private sevicesService: SevicesService) {}
+  constructor(private sevicesService: CatalogosService) {}
 
   ngOnInit(): void {
     this.loadCatalogos();  // Llamamos a la función para cargar los datos cuando el componente se inicializa
   }
 
   loadCatalogos(): void {
-    this.sevicesService.getCatalogo().subscribe({
+    this.sevicesService.getCatalogos().subscribe({
       next: (data) => {
         this.catalogos = data;  // Almacenamos los datos recibidos en la variable catalogos
       },
