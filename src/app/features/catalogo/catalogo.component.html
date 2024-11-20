@@ -1,0 +1,31 @@
+<!-- Mostrar mensaje de error si existe -->
+<div *ngIf="errorMessage" class="error">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<!-- Mostrar lista de catálogos -->
+<div class="catalogo-container">
+  <div
+    class="catalogo-card"
+    *ngFor="let catalogo of visibleCatalogos"
+  >
+    <img [src]="catalogo.imagen" alt="{{ catalogo.nombre }}" />
+    <h3>{{ catalogo.nombre }}</h3>
+    <p>{{ catalogo.descripcion }}</p>
+    <button class="btn-ver-mas-card" (click)="verDetalles(catalogo.id!)">
+      Ver Más
+    </button>
+  </div>
+</div>
+
+<!-- Botón para mostrar más catálogos -->
+<div class="contenedor-boton">
+  <button class="btn-ver-mas-principal" (click)="toggleMostrarTodo()">
+    {{ mostrarTodo ? 'VER MENOS' : 'VER MÁS' }}
+  </button>
+</div>
+
+<!-- Si no hay catálogos disponibles y no hay mensaje de error -->
+<div *ngIf="catalogos.length === 0 && !errorMessage">
+  <p>No hay catálogos disponibles.</p>
+</div>

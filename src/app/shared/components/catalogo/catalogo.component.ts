@@ -7,7 +7,7 @@ import { UpdateCatalogo } from '../../../interfaces/update-catalogo.interface'; 
 import { DeleteCatalogo } from '../../../interfaces/delete-catalogo.interface';
 
 @Component({
-  selector: 'app-catalogo',
+  selector: 'app-catalogo-admin',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './catalogo.component.html',

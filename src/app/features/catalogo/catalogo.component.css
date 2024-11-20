@@ -1,0 +1,149 @@
+/* Contenedor principal centrado */
+.catalogo-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px; /* Ancho máximo para evitar que se estire demasiado */
+  margin: 0 auto; /* Centrar el contenedor horizontalmente */
+  box-sizing: border-box;
+}
+
+/* Tarjetas de catálogo */
+.catalogo-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  text-align: center;
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.catalogo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.catalogo-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.catalogo-card h3 {
+  font-size: 1.25rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.catalogo-card p {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 16px;
+}
+
+.catalogo-card .btn-ver-mas-card {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.catalogo-card .btn-ver-mas-card:hover {
+  background-color: #0056b3;
+}
+
+/* Botón principal */
+.contenedor-boton {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn-ver-mas-principal {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-ver-mas-principal:hover {
+  background-color: #0056b3;
+}
+
+/* MEDIA QUERIES para diseño responsivo */
+
+/* Tablets y dispositivos medianos */
+@media screen and (max-width: 768px) {
+  .catalogo-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .catalogo-card {
+    padding: 12px;
+  }
+
+  .catalogo-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .catalogo-card p {
+    font-size: 0.85rem;
+  }
+
+  .btn-ver-mas-card {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .btn-ver-mas-principal {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Móviles y dispositivos pequeños */
+@media screen and (max-width: 480px) {
+  .catalogo-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
+  }
+
+  .catalogo-card {
+    padding: 10px;
+  }
+
+  .catalogo-card img {
+    height: 150px;
+  }
+
+  .catalogo-card h3 {
+    font-size: 1rem;
+  }
+
+  .catalogo-card p {
+    font-size: 0.8rem;
+  }
+
+  .btn-ver-mas-card {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .btn-ver-mas-principal {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+  }
+}
