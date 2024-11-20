@@ -26,13 +26,21 @@ export class CatalogoComponent_user implements OnInit {
   loadCatalogos(): void {
     this.sevicesService.getCatalogos().subscribe({
       next: (data) => {
-        this.catalogos = data;
+        this.catalogos = data.map(catalogo => ({
+          ...catalogo,
+          imagen: this.getImagePath(catalogo.imagen),
+        }));
         this.actualizarVista(); // Actualizar lista visible
       },
       error: (err) => {
         this.errorMessage = err.message;
       },
     });
+  }
+
+  getImagePath(nombreImagen: string): string {
+    // Asegúrate de que el path sea accesible desde el navegador
+    return `images/catalogo/${nombreImagen}`;
   }
 
   actualizarVista(): void {

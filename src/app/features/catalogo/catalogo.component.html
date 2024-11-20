@@ -5,14 +5,12 @@
 
 <!-- Mostrar lista de catálogos -->
 <div class="catalogo-container">
-  <div
-    class="catalogo-card"
-    *ngFor="let catalogo of visibleCatalogos"
-  >
+  <div class="catalogo-card" *ngFor="let catalogo of visibleCatalogos">
+    <!-- Aquí usamos la ruta generada dinámicamente -->
     <img [src]="catalogo.imagen" alt="{{ catalogo.nombre }}" />
     <h3>{{ catalogo.nombre }}</h3>
     <p>{{ catalogo.descripcion }}</p>
-    <button class="btn-ver-mas-card" (click)="verDetalles(catalogo.id!)">
+    <button class="btn-ver-mas-card" (click)="toggleMostrarTodo()">
       Ver Más
     </button>
   </div>
