@@ -10,7 +10,7 @@
     <img [src]="catalogo.imagen" alt="{{ catalogo.nombre }}" />
     <h3>{{ catalogo.nombre }}</h3>
     <p>{{ catalogo.descripcion }}</p>
-    <button class="btn-ver-mas-card" (click)="toggleMostrarTodo()">
+    <button class="btn-ver-mas-card" (click)="verDetalles(catalogo.id!)">
       Ver Más
     </button>
   </div>
