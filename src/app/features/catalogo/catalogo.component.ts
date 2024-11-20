@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { CatalogosService } from '../../../app/services/sevices.service';
-import { CreateCatalogo } from '../../../app/interfaces/create-catalogo.interface';
+import { CreateCatalogo } from '../../interfaces/create-catalogo.interface';
+
+// Extendemos la interfaz para incluir la propiedad adicional
+interface CatalogoConEstado extends CreateCatalogo {
+  mostrarImagenesAdicionales: boolean;
+}
 
 @Component({
   selector: 'app-catalogo-user',
@@ -12,8 +17,8 @@ import { CreateCatalogo } from '../../../app/interfaces/create-catalogo.interfac
   styleUrls: ['./catalogo.component.css'],
 })
 export class CatalogoComponent_user implements OnInit {
-  catalogos: CreateCatalogo[] = []; // Lista completa de catálogos
-  visibleCatalogos: CreateCatalogo[] = []; // Lista visible (limitada)
+  catalogos: CatalogoConEstado[] = []; // Lista completa de catálogos con la propiedad adicional
+  visibleCatalogos: CatalogoConEstado[] = []; // Lista visible (limitada)
   errorMessage: string = ''; // Mensaje de error
   mostrarTodo: boolean = false; // Estado de visualización
 
@@ -29,6 +34,7 @@ export class CatalogoComponent_user implements OnInit {
         this.catalogos = data.map(catalogo => ({
           ...catalogo,
           imagen: this.getImagePath(catalogo.imagen),
+          mostrarImagenesAdicionales: false, // Agregar el estado para las imágenes adicionales
         }));
         this.actualizarVista(); // Actualizar lista visible
       },
@@ -54,8 +60,8 @@ export class CatalogoComponent_user implements OnInit {
     this.actualizarVista();
   }
 
-  verDetalles(id: number): void {
-    console.log(`Mostrando detalles del catálogo con ID: ${id}`);
-    // Lógica para mostrar detalles
+  // Método para alternar la visualización de imágenes adicionales de cada catálogo
+  toggleImagenesAdicionales(catalogo: CatalogoConEstado): void {
+    catalogo.mostrarImagenesAdicionales = !catalogo.mostrarImagenesAdicionales;
   }
 }

@@ -6,13 +6,23 @@
 <!-- Mostrar lista de catálogos -->
 <div class="catalogo-container">
   <div class="catalogo-card" *ngFor="let catalogo of visibleCatalogos">
-    <!-- Aquí usamos la ruta generada dinámicamente -->
     <img [src]="catalogo.imagen" alt="{{ catalogo.nombre }}" />
     <h3>{{ catalogo.nombre }}</h3>
     <p>{{ catalogo.descripcion }}</p>
-    <button class="btn-ver-mas-card" (click)="verDetalles(catalogo.id!)">
-      Ver Más
+    
+    <!-- Botón para mostrar más detalles de un catálogo específico -->
+    <button class="btn-ver-mas-card" (click)="toggleImagenesAdicionales(catalogo)">
+      {{ catalogo.mostrarImagenesAdicionales ? 'VER MENOS' : 'VER MÁS' }}
     </button>
+
+    <!-- Mostrar imágenes adicionales solo si el flag es true -->
+    <div *ngIf="catalogo.mostrarImagenesAdicionales" class="imagenes-adicionales">
+      <h4>Imágenes Adicionales</h4>
+      <div *ngFor="let imagen of catalogo.imagenesAdicionales">
+        <img [src]="getImagePath(imagen.ruta_imagen)" alt="{{ imagen.descripcion_imagen }}" />
+        <p>{{ imagen.descripcion_imagen }}</p>
+      </div>
+    </div>
   </div>
 </div>
 

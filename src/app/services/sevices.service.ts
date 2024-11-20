@@ -1,8 +1,6 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
-
+import { Observable } from 'rxjs';
 import { CreateCatalogo } from '../interfaces/create-catalogo.interface'; // Importar las interfaces
 import { UpdateCatalogo } from '../interfaces/update-catalogo.interface';
 import { DeleteCatalogo } from '../interfaces/delete-catalogo.interface';
@@ -11,11 +9,9 @@ import { DeleteCatalogo } from '../interfaces/delete-catalogo.interface';
   providedIn: 'root',
 })
 export class CatalogosService {
-  private _baseUrl = 'http://localhost:3000/'; // Base URL para tu backend
+  private _baseUrl = 'http://localhost:3000/'; // Asegúrate de que este sea el URL correcto
 
-  private http = inject(HttpClient);
-
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
   // Obtener todos los catálogos
   getCatalogos(): Observable<CreateCatalogo[]> {
