@@ -8,6 +8,7 @@ import { ProjectComponent } from "./features/project/project.component";
 import { CatalogoComponent } from './shared/components/catalogo/catalogo.component';
 import { CreateCatalogo } from './interfaces/create-catalogo.interface';
 import { CatalogosService } from './services/sevices.service';
+import { MainPageComponent } from "./shared/components/main-page/main-page.component";
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,9 @@ import { CatalogosService } from './services/sevices.service';
     FooterComponent,
     HeaderComponent,
     ProjectComponent,
-    CatalogoComponent
-  ],
+    CatalogoComponent,
+    MainPageComponent
+],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']  // Cambié de 'styleUrl' a 'styleUrls' (en plural)
 })
