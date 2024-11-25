@@ -1,59 +1,117 @@
-/* Header Styles */
+/* Definición de la fuente "Impact" */
 @font-face {
-    font-family: "Impact", sans-serif;
-    src: url("/fonts/impact.ttf");
+  font-family: "Impact", sans-serif;
+  src: url("/fonts/impact.ttf");
+}
+
+/* Aplicar la fuente Impact a títulos */
+h1, h2 {
+  font-family: "Impact", sans-serif;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+  font-family: "Impact", sans-serif;
+  font-size: 20px; /* Tamaño de fuente de la barra de navegación */
+  padding: 0; /* Eliminar padding superior e inferior */
+  background-color: black; /* Fondo oscuro para la barra */
+}
+
+/* Estilo para los elementos de la barra de navegación */
+.nav-item {
+  padding: 0px 20px; /* Espaciado de los elementos de navegación */
+  line-height: 2.5; /* Ajuste de altura de línea */
+}
+
+/* Efecto hover sobre los elementos de la navegación */
+.nav-item:hover {
+  background: #FEC32B; /* Color de fondo al pasar el ratón */
+}
+
+/* Estilo para los enlaces en la navegación */
+.nav-link {
+  color: white !important; /* Asegurarse de que los enlaces sean blancos */
+}
+
+/* Estilos para la clase .bg-dark */
+.bg-dark {
+  background: black !important; /* Fondo oscuro para la barra */
+}
+
+/* Estilo para la clase .bg-acceso */
+.bg-acceso {
+  background: #FEC32B !important; /* Fondo naranja para la opción de acceso */
+}
+
+.bg-acceso a {
+  color: black !important; /* Color de texto en negro para el enlace de acceso */
+}
+
+/* Estilos para el logo de la barra de navegación */
+.navbar-brand img {
+  width: 150px; /* Ajustar el tamaño del logo */
+  height: auto; /* Mantener la proporción del logo */
+}
+
+/* Estilos para el botón de la barra de navegación */
+.navbar-toggler {
+  border-color: #FEC32B; /* Cambiar el color del borde del botón */
+}
+
+.navbar-toggler-icon {
+  background-color: #FEC32B; /* Cambiar el color del icono del menú hamburguesa */
+}
+
+/* Estilo para el carousel */
+.carousel {
+  border-bottom: 50px black solid; /* Borde inferior negro en el carousel */
+}
+
+.carousel-item > img {
+  animation: zoom 1s; /* Aplicar animación de zoom a las imágenes del carousel */
+}
+
+/* Estilos para el pie de la descripción en el carousel */
+.carousel-caption {
+  bottom: 40%;
+}
+
+/* Animación de zoom para las imágenes del carousel */
+@keyframes zoom {
+  from {
+    transform: scale(1.3, 1.3);
   }
-  
-  h1,
-  h2 {
-    font-family: "Impact", sans-serif;
+  to {
+    transform: scale(1, 1);
   }
-  
+}
+
+/* Estilos responsivos */
+@media (max-width: 576px) {
   .navbar {
-    font-family: "Impact", sans-serif;
-    font-size: 20px;
-    padding: 0;
+    font-size: 16px; /* Ajustar tamaño de fuente en pantallas pequeñas */
   }
-  
+
   .nav-item {
-    padding: 0px 20px;
-    line-height: 2.5;
+    padding: 0px 10px; /* Ajustar el espaciado de los elementos */
+    line-height: 2; /* Ajustar la altura de línea */
   }
-  
-  .nav-item:hover {
-    background: #fec32b;
+
+  .navbar-brand img {
+    width: 120px; /* Ajustar el tamaño del logo */
   }
-  
-  .bg-dark {
-    background: black !important;
+
+  .carousel-item img {
+    height: auto; /* Asegurar que las imágenes del carousel tengan altura automática */
   }
-  
-  .bg-acceso {
-    background: #fec32b !important;
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .navbar {
+    font-size: 18px; /* Ajustar tamaño de fuente en pantallas medianas */
   }
-  
-  .bg-acceso a {
-    color: black !important;
+
+  .carousel-item img {
+    height: auto; /* Asegurar que las imágenes del carousel tengan altura automática */
   }
-  
-  /* Responsiveness */
-  @media (max-width: 576px) {
-    .navbar {
-      font-size: 16px;
-    }
-    .nav-item {
-      padding: 0px 10px;
-      line-height: 2;
-    }
-    .navbar-brand img {
-      width: 120px;
-      height: auto;
-    }
-  }
-  
-  @media (min-width: 768px) and (max-width: 992px) {
-    .navbar {
-      font-size: 18px;
-    }
-  }
-  
+}
