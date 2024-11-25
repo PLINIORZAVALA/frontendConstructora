@@ -9,7 +9,8 @@ import { CatalogoComponent } from './shared/components/catalogo/catalogo.compone
 import { CreateCatalogo } from './interfaces/create-catalogo.interface';
 import { CatalogosService } from './services/sevices.service';
 import { MainPageComponent } from "./shared/components/main-page/main-page.component";
-import { AddListingComponent } from './shared/Admin/Zcomponens/add-catalogo/add-listing.component';
+import { AddListingComponent } from './shared/Admin/Zcomponens/agregar-catalogo/add-listing.component';
+import { CatalogoListComponent } from './shared/Admin/Zcomponens/catalogo-list/catalogo-list.component';
 
 @Component({
   selector: 'app-root',
@@ -24,6 +25,7 @@ import { AddListingComponent } from './shared/Admin/Zcomponens/add-catalogo/add-
     MainPageComponent,
 
     AddListingComponent,
+    CatalogoListComponent
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']  // Cambié de 'styleUrl' a 'styleUrls' (en plural)
