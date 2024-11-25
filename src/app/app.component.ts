@@ -9,6 +9,7 @@ import { CatalogoComponent } from './shared/components/catalogo/catalogo.compone
 import { CreateCatalogo } from './interfaces/create-catalogo.interface';
 import { CatalogosService } from './services/sevices.service';
 import { MainPageComponent } from "./shared/components/main-page/main-page.component";
+import { AddListingComponent } from './shared/Admin/Zcomponens/add-catalogo/add-listing.component';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,9 @@ import { MainPageComponent } from "./shared/components/main-page/main-page.compo
     HeaderComponent,
     ProjectComponent,
     CatalogoComponent,
-    MainPageComponent
+    MainPageComponent,
+
+    AddListingComponent,
 ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']  // Cambié de 'styleUrl' a 'styleUrls' (en plural)
