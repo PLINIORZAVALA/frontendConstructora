@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
+
 import { CreateCatalogo } from '../../../../interfaces/create-catalogo.interface';
 import { CatalogosService } from '../../../../services/sevices.service';
 
@@ -10,7 +12,11 @@ interface CatalogoConEstado extends CreateCatalogo {
 @Component({
   selector: 'app-add-listing',
   standalone: true,
-  imports: [],
+  imports: [
+    RouterLink,
+    RouterOutlet, 
+    RouterLinkActive,
+  ],
   templateUrl: './add-listing.component.html',
   styleUrl: './add-listing.component.css'
 })
