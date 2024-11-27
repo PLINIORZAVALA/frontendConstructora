@@ -2,3 +2,7 @@
 export interface DeleteCatalogo {
   id: number;
 }
+
+export interface DeleteImgAdicionales {
+  id: number;
+}

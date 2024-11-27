@@ -1,4 +1,3 @@
-import { ImagenCatalogo } from "./create-catalogo.interface";
 
 export interface UpdateCatalogo {
   id: number;  // Asegúrate de incluir 'id' aquí
@@ -6,5 +5,10 @@ export interface UpdateCatalogo {
   tipo?: string;
   descripcion?: string;
   imagen?: string;  // La imagen principal puede ser opcional en una actualización
-  imagenesAdicionales?: ImagenCatalogo[];  // Se pueden añadir o quitar imágenes adicionales
+  imagenesAdicionales?: UpdateImgnAdiconal[];  // Se pueden añadir o quitar imágenes adicionales
+}
+
+export interface UpdateImgnAdiconal {
+  ruta_imagen: string;  // URL o ruta de la imagen
+  descripcion_imagen?: string;  // Descripción opcional de la imagen
 }
