@@ -1,20 +1,4 @@
-
-
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Ansonika">
-  <title>PLINIOR - Admin dashboard</title>
-	
-  <!-- Favicons-->
-  <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" type="image/x-icon" href="../../img/apple-touch-icon-57x57-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="../../img/apple-touch-icon-72x72-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="../../img/apple-touch-icon-114x114-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="../../img/apple-touch-icon-144x144-precomposed.png">
-
   <!-- GOOGLE WEB FONT -->
   <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -23,14 +7,10 @@
   <link href="../../css/date_picker.css" rel="stylesheet">
   <link href="../../css/admin.css" rel="stylesheet">
   <link href="../../css/custom.css" rel="stylesheet">
-  
-	
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
-  <!-- 
- Navigation------------------------------------------------------------------------------------------------------------------------------------------------------------- 
- -->
+  <!-- Navigation -->
   <nav>
     <div class="content-wrapper">
       <div class="container-fluid">
@@ -41,92 +21,147 @@
           </li>
           <li class="breadcrumb-item active">Agregar catalogo</li>
         </ol>
-      <div class="box_general padding_bottom">
-        <div class="header_box version_2">
-          <h2><i class="fa fa-file"></i>Información Básica</h2>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>Datos del proyecto</label>
-              <input type="text" class="form-control" placeholder="Nombre del proyecto">
+        
+        <!-- Box General -->
+        <div class="box_general padding_bottom">
+          <div class="header_box version_2">
+            <h2><i class="fa fa-file"></i>Información Básica</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Datos del proyecto</label>
+                <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                [(ngModel)]="newCatalogo.nombre"
+                name="nombre"
+                placeholder="Nombre del proyecto"
+                required
+              />
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <!-- /box_general-->
-      
-      <div class="box_general padding_bottom">
-        <div class="header_box version_2">
-          <h2><i class="fa fa-file-text"></i>Descripción</h2>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>Descripción del proyecto</label>
-              <textarea rows="5" class="form-control" style="height:100px;" placeholder="Description"></textarea>
+        <!-- /Box General-->
+        
+        <!-- Box General for Description -->
+        <div class="box_general padding_bottom">
+          <div class="header_box version_2">
+            <h2><i class="fa fa-file-text"></i>Descripción</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Descripción del proyecto</label>
+                <textarea
+                  id="descripcion"
+                  class="form-control"
+                  [(ngModel)]="newCatalogo.descripcion"
+                  name="descripcion"
+                  placeholder="Description del proyecto"
+                  required
+                ></textarea>
+              </div>
             </div>
           </div>
-        </div>
-        <!-- /row-->
-        <div class="row">
-          <div class="col-md-12">
-            <div class="form-group">
-              <label>Categoria <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label>
-              <input type="text" class="form-control" placeholder="Carretera, puente, fabricas, vivienda">
+          <!-- /row-->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Categoria <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label>
+                <!-- Falta ver inserface si tiene o no-->
+                <input
+                type="text"
+                id="nombre"
+                class="form-control"
+                [(ngModel)]="newCatalogo.nombre"
+                name="nombre"
+                placeholder="Verificar en la interfase"
+                required
+                />
+              </div>
             </div>
           </div>
+          <!-- /row-->
         </div>
-        <!-- /row-->
-      </div>
-      <!-- /box_general-->
-      
-      <div class="box_general padding_bottom">
-        <div class="header_box version_2">
-          <h2><i class="fa fa-camera"></i>Imagenes</h2>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <h6>Datos de la imagen</h6>
-            <table id="pricing-list-container" style="width:100%;">
-              <tr class="pricing-list-item">
-                <td>
-                  <div class="row">
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Descripción de la imagen">
-                      </div>
-                    </div>
-                    <div class="col-md-5">
-                      <div class="form-group">
-                        <input type="text" class="form-control"  placeholder="Nombre de ruta de la imagen">
-                      </div>
-                    </div>
-                    <div class="col-md-2">
-                      <div class="form-group">
-                        <a class="delete" href="#"><i class="fa fa-fw fa-remove"></i></a>
-                      </div>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </table>
-            <a href="#0" class="btn_1 gray add-pricing-list-item"><i class="fa fa-fw fa-plus-circle"></i> Agregar Imagen</a>
+        <!-- /Box General-->
+        
+        <!-- Box General for Images -->
+        <div class="box_general padding_bottom">
+          <div class="header_box version_2">
+            <h2><i class="fa fa-camera"></i>Imagenes</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-5">
+              <div class="form-group">
+                <label>Datos de la imagen principal</label>
+                <!-- Falta ver inserface si tiene o no-->
+                <input
+                  type="text"
+                  id="imagen"
+                  class="form-control"
+                  [(ngModel)]="newCatalogo.imagen"
+                  placeholder="Ruta de la imagen principal"
+                  name="imagen"
+                  required
+                />
+              </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <h6>Datos de la imagen</h6>
+              <table id="pricing-list-container" style="width:100%;">
+                <tr class="pricing-list-item">
+                  <td>
+                    <div class="row">
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <!-- Flata añadir-->
+                          <input
+                            type="text"
+                            class="form-control"
+                            [(ngModel)]="newCatalogo.imagenesAdicionales"
+                            name="imagenesAdicionales"
+                            placeholder="Falta incluir en el dto o verificar"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-md-5">
+                        <div class="form-group">
+                          <input
+                          type="text"
+                          class="form-control"
+                          [(ngModel)]="newCatalogo.imagenesAdicionales"
+                          name="imagenesAdicionales"
+                          placeholder="Ingrese las URLs de las imágenes adicionales"
+                        />
+                        </div>
+                      </div>
+                      <div class="col-md-2">
+                        <div class="form-group">
+                          <a class="delete" href="#"><i class="fa fa-fw fa-remove"></i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+              <a href="#0" class="btn_1 gray add-pricing-list-item"><i class="fa fa-fw fa-plus-circle"></i> Agregar Imagen</a>
+            </div>
+          </div>
+          <!-- /row-->
         </div>
-        <!-- /row-->
-      </div>
-      <!-- /box_general-->
-      <p><a href="#0" class="btn_1 medium">Guardar</a></p>
+        <!-- /Box General-->
+        
+        <!-- Save Button -->
+        <p><a href="#0" class="btn_1 medium">Guardar</a></p>
       </div>
       <!-- /.container-fluid-->
-       </div>
-
+    </div>
   </nav>
-  
 
-
-    <!-- container-wrapper----------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
-     -->
-	
+  <!-- container-wrapper -->
 </body>
