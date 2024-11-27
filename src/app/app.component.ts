@@ -9,7 +9,7 @@ import { CatalogoComponent } from './shared/components/catalogo/catalogo.compone
 import { CreateCatalogo } from './interfaces/create-catalogo.interface';
 import { CatalogosService } from './services/sevices.service';
 import { MainPageComponent } from "./shared/components/main-page/main-page.component";
-import { AddListingComponent } from './shared/Admin/Zcomponens/agregar-catalogo/add-listing.component';
+import { AgregarCatalogoComponent } from './shared/Admin/Zcomponens/agregar-catalogo/add-listing.component';
 import { CatalogoListComponent } from './shared/Admin/Zcomponens/catalogo-list/catalogo-list.component';
 import { HeadComponent } from './shared/Admin/Zcomponens/head-sidebar/head.component';
 
@@ -27,7 +27,7 @@ import { FooterComponentAdmin } from './shared/Admin/Zcomponens/footer/footer.co
     CatalogoComponent,
     MainPageComponent,
 
-    AddListingComponent,
+    AgregarCatalogoComponent,
     CatalogoListComponent,
     HeadComponent,
     FooterComponentAdmin,

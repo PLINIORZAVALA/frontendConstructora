@@ -6,7 +6,7 @@
 <!-- Formulario para crear un nuevo catálogo -->
 <div class="form-container">
   <h2>Crear Nuevo Catálogo:</h2>
-  <form (ngSubmit)="crearCatalogo()">
+  <form >
     <label for="nombre">Nombre:</label>
     <input id="nombre" [(ngModel)]="nuevoCatalogo.nombre" name="nombre" required>
 
@@ -22,6 +22,7 @@
     <button type="submit" class="submit-btn">Crear Catálogo</button>
   </form>
 </div>
+
 
 <!-- Formulario para actualizar un catálogo, solo se muestra si un catálogo está seleccionado -->
 <div *ngIf="catalogoSeleccionado" class="form-container">
@@ -67,7 +68,7 @@
         <td>{{ catalogo.imagen }}</td>
         <td>
           <!-- Botón de eliminar -->
-          <button (click)="eliminarCatalogo(catalogo.id ?? 0)" class="action-btn delete-btn">Eliminar</button>
+          <button (click)="eliminarCatalogo(catalogo.id)" class="action-btn delete-btn">Eliminar</button>
           <!-- Botón de actualizar -->
           <button (click)="mostrarFormularioActualizar(catalogo)" class="action-btn update-btn">Actualizar</button>
         </td>

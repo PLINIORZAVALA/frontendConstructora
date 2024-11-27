@@ -1,0 +1,11 @@
+Método Angular	Ruta Backend	HTTP Método
+createCatalogo	/catalogos	POST
+findAllCatalogos	/catalogos	GET
+findCatalogoById	/catalogos/:id	GET
+updateCatalogo	/catalogos/:id	PUT
+deleteCatalogo	/catalogos/:id	DELETE
+createImagenAdicional	/catalogos/:id/imagen	POST
+findAllImagenesAdicionales	/catalogos/:id/imagenes	GET
+findImagenAdicionalById	/catalogos/imagen/:imagenId	GET
+updateImagenAdicional	/catalogos/imagen/:imagenId	PUT
+deleteImagenAdicional	/catalogos/imagen/:imagenId	DELETE

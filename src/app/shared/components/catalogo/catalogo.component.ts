@@ -1,133 +1,119 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';  // Importar FormsModule
+
+
 import { CatalogosService } from '../../../services/sevices.service';
 import { CreateCatalogo } from '../../../interfaces/create-catalogo.interface';
-import { UpdateCatalogo } from '../../../interfaces/update-catalogo.interface';  // Importar la interfaz UpdateCatalogo
-import { DeleteCatalogo } from '../../../interfaces/delete-catalogo.interface';
+import { UpdateCatalogo } from '../../../interfaces/update-catalogo.interface';
+import { DeleteCatalogo } from '../../../interfaces/delete-catalogo.interface'; 
 
 @Component({
-  selector: 'app-catalogo-admin',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
+  selector: 'app-add-listing',
   templateUrl: './catalogo.component.html',
-  styleUrls: ['./catalogo.component.css']
+  imports: [
+    FormsModule,
+    CommonModule,
+  ],
+  styleUrls: ['./catalogo.component.css'],
+  standalone: true  // Hacer el componente standalone
 })
-export class CatalogoComponent implements OnInit {
-  catalogos: CreateCatalogo[] = [];  // Variable para almacenar los catálogos
-  errorMessage: string = '';         // Variable para manejar los errores
-  nuevoCatalogo: CreateCatalogo = {  // Nuevo objeto de catálogo para el formulario
-    nombre: '',
-    tipo: '',
-    descripcion: '',
-    imagen: '',
-  };
-  catalogoSeleccionado: UpdateCatalogo | null = null;  // Objeto para el catálogo seleccionado para actualizar
 
-  constructor(private sevicesService: CatalogosService) {}
+export class CatalogoComponent implements OnInit {
+  catalogos: CreateCatalogo[] = [];
+  catalogoSeleccionado: CreateCatalogo | null = null;
+  nuevoCatalogo: CreateCatalogo = { nombre: '', tipo: '', descripcion: '', imagen: '' };
+  errorMessage: string = '';
+
+  constructor(private catalogosService: CatalogosService) {}
 
   ngOnInit(): void {
-    this.loadCatalogos();  // Llamamos a la función para cargar los catálogos cuando el componente se inicializa
+    this.obtenerCatalogos();
   }
 
-  // Método para cargar los catálogos
-  loadCatalogos(): void {
-    this.sevicesService.getCatalogos().subscribe({
+  // Obtener todos los catálogos
+  obtenerCatalogos(): void {
+    this.catalogosService.findAllCatalogos().subscribe({
       next: (data) => {
-        this.catalogos = data;  // Almacenamos los datos recibidos en la variable catalogos
+        this.catalogos = data;
       },
       error: (err) => {
-        this.errorMessage = err.message;  // Mostramos el mensaje de error en caso de fallo
+        this.errorMessage = 'No se pudieron cargar los catálogos. Intenta nuevamente más tarde.';
       }
     });
   }
 
-  // Método para eliminar un catálogo
-  eliminarCatalogo(id: number): void {
-    this.sevicesService.deleteCatalogo(id).subscribe({
-      next: () => {
-        this.catalogos = this.catalogos.filter(catalogo => catalogo.id !== id);  // Filtramos el catálogo eliminado
-        alert('Catálogo eliminado con éxito');
-      },
-      error: (err) => {
-        console.error('Error al eliminar catálogo:', err);
-        alert('Hubo un error al eliminar el catálogo');
-      }
-    });
+  // Crear un nuevo catálogo
+ 
+
+
+  // Mostrar formulario para actualizar un catálogo
+  mostrarFormularioActualizar(catalogo: CreateCatalogo): void {
+    this.catalogoSeleccionado = { ...catalogo }; // Copiar los datos del catálogo seleccionado
   }
 
-  // Método para crear un nuevo catálogo
-  crearCatalogo(): void {
-    if (this.nuevoCatalogo.nombre && this.nuevoCatalogo.tipo && this.nuevoCatalogo.descripcion && this.nuevoCatalogo.imagen) {
-      this.sevicesService.postCatalogo(this.nuevoCatalogo).subscribe({
-        next: (catalogoCreado) => {
-          this.catalogos.push(catalogoCreado);  // Agregar el catálogo creado a la lista de catálogos
-          this.nuevoCatalogo = {  // Limpiar el formulario
-            nombre: '',
-            tipo: '',
-            descripcion: '',
-            imagen: '',
-          };
-          alert('Catálogo creado con éxito');
-        },
-        error: (err) => {
-          console.error('Error al crear catálogo:', err);
-          alert('Hubo un error al crear el catálogo');
-        }
-      });
-    } else {
-      alert('Por favor, complete todos los campos');
-    }
-  }
-
-// Método para actualizar un catálogo
+// Actualizar catálogo
 actualizarCatalogo(): void {
   if (this.catalogoSeleccionado && this.catalogoSeleccionado.id !== undefined) {
-    const catalogoAActualizar: UpdateCatalogo = {
-      id: this.catalogoSeleccionado.id,  // Ahora aseguramos que id no es undefined
+    // Asegurarse de que id es un número antes de enviar
+    const catalogoParaActualizar: UpdateCatalogo = {
+      id: this.catalogoSeleccionado.id,
       nombre: this.catalogoSeleccionado.nombre,
       tipo: this.catalogoSeleccionado.tipo,
       descripcion: this.catalogoSeleccionado.descripcion,
-      imagen: this.catalogoSeleccionado.imagen,
+      imagen: this.catalogoSeleccionado.imagen
     };
-  
-    this.sevicesService.putCatalogo(catalogoAActualizar.id, catalogoAActualizar).subscribe({
-      next: (catalogoActualizado) => {
-        const index = this.catalogos.findIndex(catalogo => catalogo.id === catalogoAActualizar.id);
+
+    this.catalogosService.updateCatalogo(catalogoParaActualizar.id, catalogoParaActualizar).subscribe({
+      next: (data) => {
+        const index = this.catalogos.findIndex(c => c.id === data.id);
         if (index !== -1) {
-          this.catalogos[index] = catalogoActualizado;
+          this.catalogos[index] = data; // Actualizar el catálogo en la lista
         }
-        alert('Catálogo actualizado con éxito');
+        this.catalogoSeleccionado = null; // Limpiar formulario
       },
       error: (err) => {
-        console.error('Error al actualizar catálogo:', err);
-        alert('Hubo un error al actualizar el catálogo');
+        this.errorMessage = 'Hubo un error al actualizar el catálogo. Intenta nuevamente.';
       }
     });
   } else {
-    alert('No se ha seleccionado un catálogo válido para actualizar');
+    this.errorMessage = 'El catálogo no tiene un ID válido para la actualización.';
   }
 }
 
-// Método para mostrar el formulario de actualización con los datos del catálogo seleccionado
-mostrarFormularioActualizar(catalogo: CreateCatalogo): void {
-  if (catalogo.id !== undefined) {
-    this.catalogoSeleccionado = { 
-      id: catalogo.id,  // Aseguramos que id es un número
-      nombre: catalogo.nombre,
-      tipo: catalogo.tipo,
-      descripcion: catalogo.descripcion,
-      imagen: catalogo.imagen
-    };
+// Crear un nuevo catálogo
+/*crearCatalogo(): void {
+  // Pasar el objeto nuevoCatalogo al servicio
+  this.catalogosService.createCatalogo(this.nuevoCatalogo).subscribe({
+    next: (data) => {
+      this.catalogos.push(data); // Añadir el nuevo catálogo a la lista
+      this.nuevoCatalogo = { nombre: '', tipo: '', descripcion: '', imagen: '' }; // Limpiar formulario
+    },
+    error: (err) => {
+      this.errorMessage = 'Hubo un error al crear el catálogo. Intenta nuevamente.';
+    }
+  });
+} */
+
+
+// Eliminar un catálogo
+eliminarCatalogo(id: number | undefined): void {
+  if (id !== undefined) {  // Verificar si el id no es undefined
+    this.catalogosService.deleteCatalogo(id).subscribe({
+      next: () => {
+        this.catalogos = this.catalogos.filter(catalogo => catalogo.id !== id); // Eliminar de la lista
+      },
+      error: (err) => {
+        this.errorMessage = 'Hubo un error al eliminar el catálogo. Intenta nuevamente.';
+      }
+    });
   } else {
-    alert('El catálogo no tiene un ID válido para actualizar.');
+    this.errorMessage = 'El catálogo seleccionado no tiene un ID válido.';
   }
 }
 
-
-
-  // Método para cancelar la actualización
+  // Cancelar la actualización
   cancelarActualizacion(): void {
-    this.catalogoSeleccionado = null;  // Ocultar el formulario de actualización
+    this.catalogoSeleccionado = null;
   }
 }

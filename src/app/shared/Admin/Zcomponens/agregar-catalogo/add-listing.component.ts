@@ -1,103 +1,87 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CatalogosService } from '../../../../services/sevices.service';
-import { CreateCatalogo, CreateImgnAdiconal } from '../../../../interfaces/create-catalogo.interface';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';  // Importa FormsModule si lo necesitas
+import { CommonModule } from '@angular/common';  // Importa CommonModule si es necesario
+import { CatalogosService } from '../../../../services/sevices.service';  // Servicio
+import { CreateCatalogo, CreateImgnAdiconal } from '../../../../interfaces/create-catalogo.interface';  // Interfaces
 
 @Component({
-  selector: 'app-add-listing',
-  standalone: true,
-  imports: [FormsModule],
+  selector: 'app-add-listing-admin',
+  standalone: true,  // Componente standalone
+  imports: [
+    FormsModule,  // Asegúrate de incluir el FormsModule aquí
+    CommonModule  // Importa CommonModule si estás usando directivas comunes como `ngIf` o `ngFor`
+  ],
   templateUrl: './add-listing.component.html',
-  styleUrls: ['./add-listing.component.css'],
+  styleUrls: ['./add-listing.component.css']
 })
-export class AddListingComponent implements OnInit {
-  catalogos: CreateCatalogo[] = [];
-  
-  // Inicializar imágenes adicionales como un array vacío
+export class AgregarCatalogoComponent {
+  // Modelo para el nuevo catálogo
   newCatalogo: CreateCatalogo = {
     nombre: '',
     tipo: '',
     descripcion: '',
     imagen: '',
-    imagenesAdicionales: [],  // Inicializado como un array vacío
+    imagenesAdicionales: []
   };
 
+  // Modelo temporal para agregar imágenes adicionales
   newImgAdicional: CreateImgnAdiconal = {
     ruta_imagen: '',
-    descripcion_imagen: '',
+    descripcion_imagen: ''
   };
 
-  errorMessage: string = '';
+  constructor(private catalogosService: CatalogosService) {}
 
-  constructor(private sevicesService: CatalogosService) {}
-
-  ngOnInit(): void {
-    this.loadCatalogos();
+  /**
+   * Agregar una imagen adicional al catálogo
+   */
+  agregarImagenAdicional() {
+    if (this.newImgAdicional.ruta_imagen) {
+      this.newCatalogo.imagenesAdicionales?.push({ ...this.newImgAdicional });
+      // Limpiar el formulario temporal de imagen adicional
+      this.newImgAdicional = { ruta_imagen: '', descripcion_imagen: '' };
+    } else {
+      alert('Debe ingresar la ruta de la imagen.');
+    }
   }
 
-  loadCatalogos(): void {
-    this.sevicesService.getCatalogos().subscribe({
-      next: (data) => {
-        this.catalogos = data;
+  /**
+   * Eliminar una imagen adicional del catálogo
+   * @param index - Índice de la imagen en el arreglo
+   */
+  eliminarImagenAdicional(index: number) {
+    this.newCatalogo.imagenesAdicionales?.splice(index, 1);
+  }
+
+  /**
+   * Guardar el catálogo enviándolo al backend
+   */
+  guardarCatalogo() {
+    // Crear un objeto FormData para manejar datos de formulario y archivos
+    const formData = new FormData();
+    formData.append('nombre', this.newCatalogo.nombre);
+    formData.append('tipo', this.newCatalogo.tipo);
+    formData.append('descripcion', this.newCatalogo.descripcion);
+    formData.append('imagen', this.newCatalogo.imagen);
+
+    // Iterar sobre las imágenes adicionales y agregarlas al FormData
+    this.newCatalogo.imagenesAdicionales?.forEach((imagen, index) => {
+      formData.append(`imagenesAdicionales[${index}][ruta_imagen]`, imagen.ruta_imagen);
+      if (imagen.descripcion_imagen) {
+        formData.append(`imagenesAdicionales[${index}][descripcion_imagen]`, imagen.descripcion_imagen);
+      }
+    });
+
+    // Llamar al servicio para crear el catálogo
+    this.catalogosService.createCatalogo(formData).subscribe({
+      next: (response) => {
+        console.log('Catálogo creado:', response);
+        alert('Catálogo creado exitosamente');
       },
       error: (err) => {
-        this.errorMessage = err.message;
-      },
+        console.error('Error al crear el catálogo:', err);
+        alert('Hubo un error al crear el catálogo.');
+      }
     });
-  }
-
-  // Crear el catálogo
-  createCatalogo(): void {
-    // Asegurarnos de que 'imagenesAdicionales' siempre sea un array antes de enviarlo
-    const nuevoCatalogo: CreateCatalogo = {
-      ...this.newCatalogo,
-      // Verificación: si 'imagenesAdicionales' es 'undefined', lo inicializamos como un array vacío
-      imagenesAdicionales: this.newCatalogo.imagenesAdicionales ?? [], 
-    };
-
-    // Enviar el catálogo al servicio para ser guardado
-    this.sevicesService.postCatalogo(nuevoCatalogo).subscribe(
-      (response: any) => {
-        console.log('Catalogo Creado:', response);
-        this.loadCatalogos();  // Recarga los catálogos después de la creación
-      },
-      (err: any) => {
-        console.error('Error al crear catálogo:', err);
-      }
-    );
-  }
-
-  // Agregar una nueva imagen adicional al catálogo
-  addImagenAdicional(): void {
-    // Verificar que la ruta de la imagen no esté vacía
-    if (this.newImgAdicional.ruta_imagen.trim() !== '') {
-      // Asegurarnos de que 'imagenesAdicionales' sea un array antes de realizar la operación
-      if (!Array.isArray(this.newCatalogo.imagenesAdicionales)) {
-        this.newCatalogo.imagenesAdicionales = []; // Si no es un array, lo inicializamos
-      }
-
-      // Añadir la imagen adicional al array de 'imagenesAdicionales'
-      this.newCatalogo.imagenesAdicionales.push({
-        ruta_imagen: this.newImgAdicional.ruta_imagen.trim(),
-        descripcion_imagen: this.newImgAdicional.descripcion_imagen || '',  // Usar valor vacío si no se ingresa descripción
-      });
-
-      // Limpiar los campos después de agregar la imagen
-      this.newImgAdicional = {
-        ruta_imagen: '',
-        descripcion_imagen: '',
-      };
-    } else {
-      alert('Por favor ingrese una ruta de imagen válida.');
-    }
-  }
-
-  // Eliminar una imagen adicional de la lista
-  removeImagenAdicional(index: number): void {
-    // Asegurarnos de que 'imagenesAdicionales' sea un array antes de realizar la operación
-    if (Array.isArray(this.newCatalogo.imagenesAdicionales)) {
-      // Eliminar la imagen seleccionada del array
-      this.newCatalogo.imagenesAdicionales.splice(index, 1);
-    }
   }
 }
