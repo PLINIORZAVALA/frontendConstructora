@@ -71,14 +71,13 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label>Categoria <a href="#0" data-toggle="tooltip" data-placement="top" title="Separated by commas"><i class="fa fa-fw fa-question-circle"></i></a></label>
-                <!-- Falta ver inserface si tiene o no-->
                 <input
                 type="text"
                 id="nombre"
                 class="form-control"
-                [(ngModel)]="newCatalogo.nombre"
+                [(ngModel)]="newCatalogo.tipo"
                 name="nombre"
-                placeholder="Verificar en la interfase"
+                placeholder="Tipo de proyecto"
                 required
                 />
               </div>
@@ -97,13 +96,12 @@
             <div class="col-md-5">
               <div class="form-group">
                 <label>Datos de la imagen principal</label>
-                <!-- Falta ver inserface si tiene o no-->
                 <input
                   type="text"
                   id="imagen"
                   class="form-control"
                   [(ngModel)]="newCatalogo.imagen"
-                  placeholder="Ruta de la imagen principal"
+                  placeholder="Ingrese la ruta de la imagen principal"
                   name="imagen"
                   required
                 />
@@ -136,7 +134,7 @@
                           class="form-control"
                           [(ngModel)]="newCatalogo.imagenesAdicionales"
                           name="imagenesAdicionales"
-                          placeholder="Ingrese las URLs de las imágenes adicionales"
+                          placeholder="Ingrese la ruta de la iamgen adicional"
                         />
                         </div>
                       </div>
