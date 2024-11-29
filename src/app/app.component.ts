@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule  } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { CatalogoComponent_user } from './features/catalogo/catalogo.component';
 import { FooterComponent } from "./shared/components/footer/footer.component";
@@ -19,6 +20,7 @@ import { FooterComponentAdmin } from './shared/Admin/Zcomponens/footer/footer.co
   selector: 'app-root',
   standalone: true,
   imports: [
+    CommonModule,
     RouterOutlet,
     CatalogoComponent_user,
     FooterComponent,

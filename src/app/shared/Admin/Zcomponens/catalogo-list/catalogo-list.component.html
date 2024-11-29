@@ -1,19 +1,4 @@
-
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="Ansonika">
-  <title>UDEMA - Admin dashboard</title>
-	
-  <!-- Favicons-->
-  <link rel="shortcut icon" href="../../img/favicon.ico" type="image/x-icon">
-  <link rel="apple-touch-icon" type="image/x-icon" href="../../img/apple-touch-icon-57x57-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="../../img/apple-touch-icon-72x72-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="../../img/apple-touch-icon-114x114-precomposed.png">
-  <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="../../img/apple-touch-icon-144x144-precomposed.png">
-
   <!-- GOOGLE WEB FONT -->
   <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="../../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -22,8 +7,6 @@
   <link href="../../css/date_picker.css" rel="stylesheet">
   <link href="../../css/admin.css" rel="stylesheet">
   <link href="../../css/custom.css" rel="stylesheet">
-  
-	
 </head>
 
 <body class="fixed-nav sticky-footer" id="page-top">
@@ -44,36 +27,76 @@
           <i class="fa fa-table"></i> Datos de los catalogos creados</div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Tipo</th>
-                  <th>Descripción</th>
-                  <th>Imagen principal</th>
-                  <th>Imagenes catalogo</th>
-                  <th>Accion</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Tiger Nixon</td>
-                  <td>System Architect</td>
-                  <td>Edinburgh</td>
-                  <td>img4.jpg</td>
-                  <td>4 imagenes</td>
-                  <td>Eliminar | Actualizar</td>
-                </tr>
-                <tr>
-                  <td>Garrett Winters</td>
-                  <td>Accountant</td>
-                  <td>Tokyo</td>
-                  <td>img3.jpg</td>
-                  <td>8 imagenes</td>
-                  <td>Eliminar | Actualizar</td>
-                </tr>
-              </tbody>
-            </table>
+           <!-- Mostrar mensaje de error si existe -->
+            <div *ngIf="errorMessage" class="error">
+              <p>{{ errorMessage }}</p>
+            </div>
+
+            <!-- Mostrar lista de catálogos si existen -->
+            <div *ngIf="catalogos.length > 0">
+              <h2>Catálogos:</h2>
+              <table class="catalog-table">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Tipo</th>
+                    <th>Descripción</th>
+                    <th>Imagen</th>
+                    <th>Acciones</th> <!-- Columna para las acciones (eliminar y actualizar) -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let catalogo of catalogos">
+                    <td>{{ catalogo.nombre }}</td>
+                    <td>{{ catalogo.tipo }}</td>
+                    <td>{{ catalogo.descripcion }}</td>
+                    <td>{{ catalogo.imagen }}</td>
+                    <td>
+                      <!-- Botón de eliminar -->
+                      <button (click)="eliminarCatalogo(catalogo.id)" class="action-btn delete-btn">Eliminar</button>
+                      <!-- Botón de actualizar -->
+                      <button (click)="mostrarFormularioActualizar(catalogo)" class="action-btn update-btn">Actualizar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Si no hay catálogos disponibles y no hay mensaje de error -->
+            <div *ngIf="catalogos.length === 0 && !errorMessage">
+              <p>No hay catálogos disponibles.</p>
+            </div>
+
+            <!-- Mostrar lista de imágenes adicionales si existen -->
+            <div *ngIf="imagenesAdicionales.length > 0">
+              <h2>Imágenes Adicionales:</h2>
+              <table class="images-table">
+                <thead>
+                  <tr>
+                    <th>URL</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th> <!-- Columna para las acciones (eliminar y actualizar) -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let imagen of imagenesAdicionales">
+                    <td>{{ imagen.ruta_imagen ?? 'URL no disponible' }}</td>  <!-- Cambié 'url' por 'ruta_imagen' -->
+                    <td>{{ imagen.descripcion_imagen ?? 'Descripción no disponible' }}</td> <!-- Cambié 'descripcion' por 'descripcion_imagen' -->
+                    <td>
+                      <button (click)="eliminarImagenAdicional(imagen.id)" class="action-btn delete-btn">Eliminar</button>
+                      <button (click)="mostrarFormularioActualizarImagen(imagen)" class="action-btn update-btn">Actualizar</button>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+
+<!-- Si no hay imágenes adicionales disponibles -->
+<div *ngIf="imagenesAdicionales.length === 0 && !errorMessage">
+  <p>No hay imágenes adicionales disponibles.</p>
+</div>
+
           </div>
         </div>
         <div class="card-footer small text-muted"></div>
@@ -85,34 +108,4 @@
 
 
     <!-- /.container-wrapper----------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>Copyright © PLINIOR ZAVALA  2024</small>
-        </div>
-      </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <a class="btn btn-primary" href="login.html">Logout</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Bootstrap core JavaScript-->
 </body>

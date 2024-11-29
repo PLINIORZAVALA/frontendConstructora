@@ -1,7 +1,8 @@
 export interface CreateImgnAdiconal {
-  id?: number;  // Hacer que id sea opcional
-  ruta_imagen: string;  // URL o ruta de la imagen
-  descripcion_imagen?: string;  // Descripción opcional de la imagen
+  id?: number;
+  catalogoId?: number;  // Hacer que catalogoId sea opcional
+  ruta_imagen: string;
+  descripcion_imagen?: string;
 }
 
 export interface CreateCatalogo {

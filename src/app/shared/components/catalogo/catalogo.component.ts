@@ -9,7 +9,7 @@ import { UpdateCatalogo } from '../../../interfaces/update-catalogo.interface';
 import { DeleteCatalogo } from '../../../interfaces/delete-catalogo.interface'; 
 
 @Component({
-  selector: 'app-add-listing',
+  selector: 'app-catalogo',
   templateUrl: './catalogo.component.html',
   imports: [
     FormsModule,

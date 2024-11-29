@@ -26,7 +26,7 @@ export class AgregarCatalogoComponent {
 
   // Modelo temporal para agregar imágenes adicionales
   newImgAdicional: CreateImgnAdiconal = {
-    ruta_imagen: '',
+    ruta_imagen: ' ',
     descripcion_imagen: ''
   };
 

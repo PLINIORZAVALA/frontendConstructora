@@ -1,12 +1,11 @@
-
 export interface UpdateCatalogo {
-  id: number;  // Asegúrate de incluir 'id' aquí
-  nombre?: string;
-  tipo?: string;
-  descripcion?: string;
-  imagen?: string;  // La imagen principal puede ser opcional en una actualización
-  imagenesAdicionales?: UpdateImgnAdiconal[];  // Se pueden añadir o quitar imágenes adicionales
+  id: number;  // Asegúrate de que 'id' esté definido aquí
+  nombre: string;
+  tipo: string;
+  descripcion: string;
+  imagen: string;
 }
+
 
 export interface UpdateImgnAdiconal {
   ruta_imagen: string;  // URL o ruta de la imagen

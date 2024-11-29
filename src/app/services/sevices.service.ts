@@ -20,6 +20,7 @@ export class CatalogosService {
   }
 
   // Crear un nuevo catálogo
+  
   // Método para crear un catálogo, acepta un FormData
   createCatalogo(formData: FormData): Observable<any> {
     // Realiza una solicitud POST para enviar el FormData al backend
