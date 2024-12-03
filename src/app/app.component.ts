@@ -1,6 +1,5 @@
-import { Component, OnInit, NgModule  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CommonModule } from '@angular/common';
 
 import { CatalogoComponent_user } from './features/catalogo/catalogo.component';
 import { FooterComponent } from "./shared/components/footer/footer.component";
@@ -9,31 +8,29 @@ import { ProjectComponent } from "./features/project/project.component";
 import { CatalogoComponent } from './shared/components/catalogo/catalogo.component';
 import { CreateCatalogo } from './interfaces/create-catalogo.interface';
 import { CatalogosService } from './services/sevices.service';
-import { MainPageComponent } from "./shared/components/main-page/main-page.component";
-import { AgregarCatalogoComponent } from './shared/Admin/Zcomponens/agregar-catalogo/add-listing.component';
-import { CatalogoListComponent } from './shared/Admin/Zcomponens/catalogo-list/catalogo-list.component';
-import { HeadComponent } from './shared/Admin/Zcomponens/head-sidebar/head.component';
+import { CrearCatalogoComponent } from './shared/components/catalogo/crear-catalogo/crear-catalogo.component';
 
-import { FooterComponentAdmin } from './shared/Admin/Zcomponens/footer/footer.component';
+import { CreateUserComponent } from './create-user/create-user.component';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule,
     RouterOutlet,
     CatalogoComponent_user,
     FooterComponent,
     HeaderComponent,
     ProjectComponent,
+    
     CatalogoComponent,
-    MainPageComponent,
+    CrearCatalogoComponent,
 
-    AgregarCatalogoComponent,
-    CatalogoListComponent,
-    HeadComponent,
-    FooterComponentAdmin,
-],
+    CreateUserComponent,
+
+    LoginComponent,
+
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']  // Cambié de 'styleUrl' a 'styleUrls' (en plural)
 })

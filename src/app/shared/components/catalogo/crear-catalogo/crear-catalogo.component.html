@@ -1,0 +1,67 @@
+<!-- Mostrar mensaje de error si existe -->
+<div *ngIf="errorMessage" class="error">
+  <p>{{ errorMessage }}</p>
+</div>
+
+<!-- Formulario para crear un nuevo catálogo -->
+<div class="form-container">
+  <h2>Crear Nuevo Catálogo</h2>
+  <form (ngSubmit)="crearCatalogo()" #crearCatalogoForm="ngForm">
+    <label for="nombre">Nombre:</label>
+    <input 
+      id="nombre" 
+      [(ngModel)]="nuevoCatalogo.nombre" 
+      name="nombre" 
+      required 
+      #nombre="ngModel"
+      [class.invalid]="nombre.invalid && nombre.touched">
+    <div *ngIf="nombre.invalid && nombre.touched" class="error-message">
+      <p>Este campo es obligatorio</p>
+    </div>
+
+    <label for="tipo">Tipo:</label>
+    <input 
+      id="tipo" 
+      [(ngModel)]="nuevoCatalogo.tipo" 
+      name="tipo" 
+      required 
+      #tipo="ngModel"
+      [class.invalid]="tipo.invalid && tipo.touched">
+    <div *ngIf="tipo.invalid && tipo.touched" class="error-message">
+      <p>Este campo es obligatorio</p>
+    </div>
+
+    <label for="descripcion">Descripción:</label>
+    <input 
+      id="descripcion" 
+      [(ngModel)]="nuevoCatalogo.descripcion" 
+      name="descripcion" 
+      required 
+      #descripcion="ngModel"
+      [class.invalid]="descripcion.invalid && descripcion.touched">
+    <div *ngIf="descripcion.invalid && descripcion.touched" class="error-message">
+      <p>Este campo es obligatorio</p>
+    </div>
+
+    <label for="imagen">Imagen:</label>
+    <input 
+      id="imagen" 
+      [(ngModel)]="nuevoCatalogo.imagen" 
+      name="imagen" 
+      required 
+      #imagen="ngModel"
+      [class.invalid]="imagen.invalid && imagen.touched">
+    <div *ngIf="imagen.invalid && imagen.touched" class="error-message">
+      <p>Este campo es obligatorio</p>
+    </div>
+
+    <div class="form-actions">
+      <button 
+        type="submit" 
+        class="submit-btn" 
+        [disabled]="crearCatalogoForm.invalid || isLoading">
+        {{ isLoading ? 'Creando...' : 'Crear Catálogo' }}
+      </button>
+    </div>
+  </form>
+</div>

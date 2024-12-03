@@ -3,53 +3,80 @@
   <p>{{ errorMessage }}</p>
 </div>
 
-<!-- Formulario para crear un nuevo catálogo -->
-<div class="form-container">
-  <h2>Crear Nuevo Catálogo:</h2>
-  <form >
-    <label for="nombre">Nombre:</label>
-    <input id="nombre" [(ngModel)]="nuevoCatalogo.nombre" name="nombre" required>
+<!-- Modal para actualizar catálogo -->
+<div *ngIf="catalogoSeleccionado" class="modal-overlay" (click)="cancelarActualizacion()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h2>Actualizar Catálogo</h2>
+    <form (ngSubmit)="actualizarCatalogo()" #actualizarCatalogoForm="ngForm">
+      <label for="nombre">Nombre:</label>
+      <input 
+        id="nombre" 
+        [(ngModel)]="catalogoSeleccionado.nombre" 
+        name="nombre" 
+        required 
+        #nombre="ngModel"
+        [class.invalid]="nombre.invalid && nombre.touched">
+      <div *ngIf="nombre.invalid && nombre.touched" class="error-message">
+        <p>Este campo es obligatorio</p>
+      </div>
 
-    <label for="tipo">Tipo:</label>
-    <input id="tipo" [(ngModel)]="nuevoCatalogo.tipo" name="tipo" required>
+      <label for="tipo">Tipo:</label>
+      <input 
+        id="tipo" 
+        [(ngModel)]="catalogoSeleccionado.tipo" 
+        name="tipo" 
+        required 
+        #tipo="ngModel"
+        [class.invalid]="tipo.invalid && tipo.touched">
+      <div *ngIf="tipo.invalid && tipo.touched" class="error-message">
+        <p>Este campo es obligatorio</p>
+      </div>
 
-    <label for="descripcion">Descripción:</label>
-    <input id="descripcion" [(ngModel)]="nuevoCatalogo.descripcion" name="descripcion" required>
+      <label for="descripcion">Descripción:</label>
+      <input 
+        id="descripcion" 
+        [(ngModel)]="catalogoSeleccionado.descripcion" 
+        name="descripcion" 
+        required 
+        #descripcion="ngModel"
+        [class.invalid]="descripcion.invalid && descripcion.touched">
+      <div *ngIf="descripcion.invalid && descripcion.touched" class="error-message">
+        <p>Este campo es obligatorio</p>
+      </div>
 
-    <label for="imagen">Imagen:</label>
-    <input id="imagen" [(ngModel)]="nuevoCatalogo.imagen" name="imagen" required>
+      <label for="imagen">Imagen:</label>
+      <input 
+        id="imagen" 
+        [(ngModel)]="catalogoSeleccionado.imagen" 
+        name="imagen" 
+        required 
+        #imagen="ngModel"
+        [class.invalid]="imagen.invalid && imagen.touched">
+      <div *ngIf="imagen.invalid && imagen.touched" class="error-message">
+        <p>Este campo es obligatorio</p>
+      </div>
 
-    <button type="submit" class="submit-btn">Crear Catálogo</button>
-  </form>
-</div>
-
-
-<!-- Formulario para actualizar un catálogo, solo se muestra si un catálogo está seleccionado -->
-<div *ngIf="catalogoSeleccionado" class="form-container">
-  <h2>Actualizar Catálogo:</h2>
-  <form (ngSubmit)="actualizarCatalogo()">
-    <label for="nombre">Nombre:</label>
-    <input id="nombre" [(ngModel)]="catalogoSeleccionado.nombre" name="nombre" required>
-
-    <label for="tipo">Tipo:</label>
-    <input id="tipo" [(ngModel)]="catalogoSeleccionado.tipo" name="tipo" required>
-
-    <label for="descripcion">Descripción:</label>
-    <input id="descripcion" [(ngModel)]="catalogoSeleccionado.descripcion" name="descripcion" required>
-
-    <label for="imagen">Imagen:</label>
-    <input id="imagen" [(ngModel)]="catalogoSeleccionado.imagen" name="imagen" required>
-
-    <div class="form-actions">
-      <button type="submit" class="submit-btn">Actualizar Catálogo</button>
-      <button type="button" class="cancel-btn" (click)="cancelarActualizacion()">Cancelar</button>
-    </div>
-  </form>
+      <div class="form-actions">
+        <button 
+          type="submit" 
+          class="submit-btn" 
+          [disabled]="actualizarCatalogoForm.invalid || isLoading">
+          {{ isLoading ? 'Actualizando...' : 'Actualizar Catálogo' }}
+        </button>
+        <button 
+          type="button" 
+          class="cancel-btn" 
+          (click)="cancelarActualizacion()">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
 
 <!-- Mostrar lista de catálogos si existen -->
 <div *ngIf="catalogos.length > 0">
-  <h2>Catálogos:</h2>
+  <h2>Lista de Catálogos:</h2>
   <table class="catalog-table">
     <thead>
       <tr>
@@ -68,7 +95,7 @@
         <td>{{ catalogo.imagen }}</td>
         <td>
           <!-- Botón de eliminar -->
-          <button (click)="eliminarCatalogo(catalogo.id)" class="action-btn delete-btn">Eliminar</button>
+          <button (click)="eliminarCatalogo(catalogo.id ?? 0)" class="action-btn delete-btn">Eliminar</button>
           <!-- Botón de actualizar -->
           <button (click)="mostrarFormularioActualizar(catalogo)" class="action-btn update-btn">Actualizar</button>
         </td>

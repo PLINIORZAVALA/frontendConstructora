@@ -1,117 +1,103 @@
-/* Definición de la fuente "Impact" */
-@font-face {
-  font-family: "Impact", sans-serif;
-  src: url("/fonts/impact.ttf");
+/* Estilos básicos del menú */
+.autonav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
 }
 
-/* Aplicar la fuente Impact a títulos */
-h1, h2 {
-  font-family: "Impact", sans-serif;
+.autonav__item {
+    position: relative;
 }
 
-/* Estilos para la barra de navegación */
-.navbar {
-  font-family: "Impact", sans-serif;
-  font-size: 20px; /* Tamaño de fuente de la barra de navegación */
-  padding: 0; /* Eliminar padding superior e inferior */
-  background-color: black; /* Fondo oscuro para la barra */
+.autonav__link {
+    text-decoration: none;
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    font-weight: bold;
 }
 
-/* Estilo para los elementos de la barra de navegación */
-.nav-item {
-  padding: 0px 20px; /* Espaciado de los elementos de navegación */
-  line-height: 2.5; /* Ajuste de altura de línea */
+.autonav__link:hover {
+    background-color: #f0f0f0;
+    color: #000;
 }
 
-/* Efecto hover sobre los elementos de la navegación */
-.nav-item:hover {
-  background: #FEC32B; /* Color de fondo al pasar el ratón */
+/* Dropdown */
+.autonav__dropdown {
+    list-style: none;
+    padding: 10px;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Estilo para los enlaces en la navegación */
-.nav-link {
-  color: white !important; /* Asegurarse de que los enlaces sean blancos */
+.autonav__item:hover .autonav__dropdown {
+    display: block;
 }
 
-/* Estilos para la clase .bg-dark */
-.bg-dark {
-  background: black !important; /* Fondo oscuro para la barra */
+.autonav__dropdown-link {
+    text-decoration: none;
+    color: #555;
+    padding: 8px 12px;
+    display: block;
 }
 
-/* Estilo para la clase .bg-acceso */
-.bg-acceso {
-  background: #FEC32B !important; /* Fondo naranja para la opción de acceso */
+.autonav__dropdown-link:hover {
+    background-color: #f0f0f0;
+    color: #000;
 }
 
-.bg-acceso a {
-  color: black !important; /* Color de texto en negro para el enlace de acceso */
+/* Header Styles */
+.nist-header {
+    background: #000;
+    font-family: Helvetica, Arial, sans-serif;
+    padding: 10px 16px 0;
+    font-size: 16px;
 }
 
-/* Estilos para el logo de la barra de navegación */
-.navbar-brand img {
-  width: 150px; /* Ajustar el tamaño del logo */
-  height: auto; /* Mantener la proporción del logo */
+.nist-header__logo-link {
+    display: inline-block;
+    height: 35px;
 }
 
-/* Estilos para el botón de la barra de navegación */
-.navbar-toggler {
-  border-color: #FEC32B; /* Cambiar el color del borde del botón */
+/* For Bootstrap Users - Updated the vertical align property since it interfered with NIST SVG icon. */
+.nist-header__logo-link svg {
+    vertical-align: inherit;
 }
 
-.navbar-toggler-icon {
-  background-color: #FEC32B; /* Cambiar el color del icono del menú hamburguesa */
+.nist-header__logo-icon {
+    fill: #fff;
+    display: inline-block;
+    height: 16px;
+    position: relative;
+    top: -2px;
+    margin-right: 2px;
 }
 
-/* Estilo para el carousel */
-.carousel {
-  border-bottom: 50px black solid; /* Borde inferior negro en el carousel */
+.nist-header__logo-image {
+    fill: #fff;
+    display: inline-block;
+    height: 24px;
+    width: 90px;
 }
 
-.carousel-item > img {
-  animation: zoom 1s; /* Aplicar animación de zoom a las imágenes del carousel */
+/* Limit main content area width */
+.nist-main {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    padding: 0 16px;
+    box-sizing: border-box;
 }
 
-/* Estilos para el pie de la descripción en el carousel */
-.carousel-caption {
-  bottom: 40%;
-}
-
-/* Animación de zoom para las imágenes del carousel */
-@keyframes zoom {
-  from {
-    transform: scale(1.3, 1.3);
-  }
-  to {
-    transform: scale(1, 1);
-  }
-}
-
-/* Estilos responsivos */
-@media (max-width: 576px) {
-  .navbar {
-    font-size: 16px; /* Ajustar tamaño de fuente en pantallas pequeñas */
-  }
-
-  .nav-item {
-    padding: 0px 10px; /* Ajustar el espaciado de los elementos */
-    line-height: 2; /* Ajustar la altura de línea */
-  }
-
-  .navbar-brand img {
-    width: 120px; /* Ajustar el tamaño del logo */
-  }
-
-  .carousel-item img {
-    height: auto; /* Asegurar que las imágenes del carousel tengan altura automática */
-  }
-}
-
-@media (min-width: 768px) and (max-width: 992px) {
-  .navbar {
-    font-size: 18px; /* Ajustar tamaño de fuente en pantallas medianas */
-  }
-
-  .carousel-item img {
-    height: auto; /* Asegurar que las imágenes del carousel tengan altura automática */
-  }
+/* Make sure body has no margin or padding when using only this header component */
+body {
+    padding: 0;
+    margin: 0;
 }
