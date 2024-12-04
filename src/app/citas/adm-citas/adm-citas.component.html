@@ -1,122 +1,127 @@
 <div class="container">
-    <h1>Administrar Citas</h1>
-  
-    <!-- Formulario para crear o editar una cita -->
-    <form (ngSubmit)="saveCita()" #citaForm="ngForm">
-      <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input
-          type="text"
-          id="nombre"
-          name="nombre"
-          [(ngModel)]="cita.nombre"
-          required
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="apellido">Apellido</label>
-        <input
-          type="text"
-          id="apellido"
-          name="apellido"
-          [(ngModel)]="cita.apellido"
-          required
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="email">Correo Electrónico</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          [(ngModel)]="cita.email"
-          required
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="fecha">Fecha</label>
-        <input
-          type="datetime-local"
-          id="fecha"
-          name="fecha"
-          [(ngModel)]="cita.fecha"
-          required
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="motivo">Motivo</label>
-        <input
-          type="text"
-          id="motivo"
-          name="motivo"
-          [(ngModel)]="cita.motivo"
-          required
-          class="form-control"
-        />
-      </div>
-      <div class="form-group">
-        <label for="estado">Estado</label>
-        <select
-          id="estado"
-          name="estado"
-          [(ngModel)]="cita.estado"
-          required
-          class="form-control"
+  <h1>Administrar Citas</h1>
+
+  <hr />
+
+  <!-- Lista de citas -->
+  <h2>Lista de Citas</h2>
+  <table class="catalog-table">
+    <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Fecha</th>
+        <th>Motivo</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cita of citas">
+        <td>{{ cita.nombre }}</td>
+        <td>{{ cita.apellido }}</td>
+        <td>{{ cita.email }}</td>
+        <td>{{ cita.fecha | date:'dd/MM/yyyy HH:mm' }}</td>
+        <td>{{ cita.motivo }}</td>
+        <td>{{ cita.estado }}</td>
+        <td>
+          <button class="action-btn update-btn" (click)="editCita(cita)">
+            Editar
+          </button>
+          <button class="action-btn delete-btn" (click)="deleteCita(cita.id)">
+            Eliminar
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Modal para editar cita -->
+  <div *ngIf="citaSeleccionada" class="modal-overlay" (click)="cancelarEdicion()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <h2>Actualizar Cita</h2>
+      <form (ngSubmit)="saveCita()" #citaModalForm="ngForm">
+        <div class="form-group">
+          <label for="modal-nombre">Nombre</label>
+          <input
+            type="text"
+            id="modal-nombre"
+            name="nombre"
+            [(ngModel)]="citaSeleccionada.nombre"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="modal-apellido">Apellido</label>
+          <input
+            type="text"
+            id="modal-apellido"
+            name="apellido"
+            [(ngModel)]="citaSeleccionada.apellido"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="modal-email">Correo Electrónico</label>
+          <input
+            type="email"
+            id="modal-email"
+            name="email"
+            [(ngModel)]="citaSeleccionada.email"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="modal-fecha">Fecha</label>
+          <input
+            type="datetime-local"
+            id="modal-fecha"
+            name="fecha"
+            [(ngModel)]="citaSeleccionada.fecha"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="modal-motivo">Motivo</label>
+          <input
+            type="text"
+            id="modal-motivo"
+            name="motivo"
+            [(ngModel)]="citaSeleccionada.motivo"
+            required
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="modal-estado">Estado</label>
+          <select
+            id="modal-estado"
+            name="estado"
+            [(ngModel)]="citaSeleccionada.estado"
+            required
+            class="form-control"
+          >
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmada">Confirmada</option>
+            <option value="cancelada">Cancelada</option>
+          </select>
+        </div>
+        <button
+          type="submit"
+          class="submit-btn"
+          [disabled]="!citaModalForm.form.valid || isLoading"
         >
-          <option value="pendiente">Pendiente</option>
-          <option value="confirmada">Confirmada</option>
-          <option value="cancelada">Cancelada</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary" [disabled]="!citaForm.form.valid">
-        {{ editing ? 'Actualizar Cita' : 'Crear Cita' }}
-      </button>
-    </form>
-  
-    <hr />
-  
-    <!-- Lista de citas -->
-    <h2>Lista de Citas</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Nombre</th>
-          <th>Apellido</th>
-          <th>Email</th>
-          <th>Fecha</th>
-          <th>Motivo</th>
-          <th>Estado</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cita of citas">
-          <td>{{ cita.nombre }}</td>
-          <td>{{ cita.apellido }}</td>
-          <td>{{ cita.email }}</td>
-          <td>{{ cita.fecha | date:'dd/MM/yyyy HH:mm' }}</td> <!-- Formato de fecha ajustado -->
-          <td>{{ cita.motivo }}</td>
-          <td>{{ cita.estado }}</td>
-          <td>
-            <button
-              class="btn btn-warning"
-              (click)="editCita(cita)"
-            >
-              Editar
-            </button>
-            <button
-              class="btn btn-danger"
-              (click)="deleteCita(cita.id)"
-            >
-              Eliminar
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          {{ isLoading ? 'Actualizando...' : 'Actualizar Cita' }}
+        </button>
+        <button type="button" class="cancel-btn" (click)="cancelarEdicion()">
+          Cancelar
+        </button>
+      </form>
+    </div>
   </div>
-  
+</div>

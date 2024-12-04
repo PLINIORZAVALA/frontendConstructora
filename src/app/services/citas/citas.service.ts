@@ -1,5 +1,3 @@
-// src/app/services/cita.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -9,19 +7,13 @@ import { Cita } from '../../interfaces/citas/cita.interface';
   providedIn: 'root'
 })
 export class CitaService {
+  private apiUrl = 'http://localhost:3000/citas'; // Asegúrate de que esta URL sea correcta
 
-  private apiUrl = 'http://localhost:3000/citas';  // Asegúrate de que esta URL coincida con la de tu backend
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   // Obtener todas las citas
   getCitas(): Observable<Cita[]> {
     return this.http.get<Cita[]>(this.apiUrl);
-  }
-
-  // Obtener una cita por ID
-  getCitaById(id: number): Observable<Cita> {
-    return this.http.get<Cita>(`${this.apiUrl}/${id}`);
   }
 
   // Crear una nueva cita

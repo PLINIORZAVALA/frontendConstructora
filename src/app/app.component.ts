@@ -13,6 +13,9 @@ import { CrearCatalogoComponent } from './shared/components/catalogo/crear-catal
 import { CreateUserComponent } from './create-user/create-user.component';
 import { LoginComponent } from './login/login.component';
 
+import { CitasComponent } from './citas/citas.component';
+import { AdmCitasComponent } from './citas/adm-citas/adm-citas.component'; 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -29,6 +32,9 @@ import { LoginComponent } from './login/login.component';
     CreateUserComponent,
 
     LoginComponent,
+
+    CitasComponent,
+    AdmCitasComponent,
 
   ],
   templateUrl: './app.component.html',

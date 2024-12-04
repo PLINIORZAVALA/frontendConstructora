@@ -5,6 +5,7 @@
   padding: 15px;
   margin: 10px 0;
   border-radius: 5px;
+  font-size: 14px;
 }
 
 /* Estilos para el overlay del modal */
@@ -72,11 +73,18 @@ form label {
   font-weight: bold;
 }
 
-form input {
+form input, form select {
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+/* Validación del formulario (si es inválido) */
+form input.invalid, form select.invalid {
+  border-color: #e74c3c;
 }
 
 /* Estilo para los botones de acción en la tabla */
@@ -90,6 +98,7 @@ form input {
   margin: 5px;
 }
 
+/* Botón de "Eliminar" en la tabla */
 .delete-btn {
   background-color: #e74c3c;
   color: white;
@@ -99,6 +108,7 @@ form input {
   background-color: #c0392b;
 }
 
+/* Botón de "Actualizar" en la tabla */
 .update-btn {
   background-color: #3498db;
   color: white;
@@ -108,16 +118,18 @@ form input {
   background-color: #2980b9;
 }
 
-/* Tabla de catálogos */
+/* Tabla de citas */
 .catalog-table {
   width: 100%;
   border-collapse: collapse;
+  margin-top: 20px;
 }
 
 .catalog-table th, .catalog-table td {
-  padding: 10px;
+  padding: 12px;
   text-align: left;
   border-bottom: 1px solid #ddd;
+  font-size: 14px;
 }
 
 .catalog-table th {
@@ -134,36 +146,37 @@ form input {
   border-radius: 5px;
   padding: 6px 10px;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.catalog-table .delete-btn {
-  background-color: #e74c3c;
-  color: white;
+/* Estilo para el contenedor de las citas */
+.citas-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.catalog-table .delete-btn:hover {
-  background-color: #c0392b;
+/* Estilo para los encabezados */
+h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
 }
 
-.catalog-table .update-btn {
-  background-color: #3498db;
-  color: white;
+/* Estilo para la tabla de citas */
+.catalog-table th, .catalog-table td {
+  text-align: center;
 }
 
-.catalog-table .update-btn:hover {
-  background-color: #2980b9;
+/* Botón de "Cancelar" en la interfaz */
+.cancel-btn {
+  background-color: #f8d7da;
+  color: #dc3545;
 }
 
-/* Estilo para los formularios */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form input {
-  margin-bottom: 15px;
-}
-
-form button {
-  margin-top: 20px;
+.cancel-btn:hover {
+  background-color: #f1c0c0;
 }
