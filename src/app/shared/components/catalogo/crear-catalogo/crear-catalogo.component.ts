@@ -3,6 +3,8 @@ import { FormsModule } from '@angular/forms';
 
 import { CatalogosService } from '../../../../services/sevices.service';
 import { CreateCatalogo } from '../../../../interfaces/create-catalogo.interface';
+import { AuthService } from '../../../../services/login/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-catalogo',
@@ -21,8 +23,13 @@ export class CrearCatalogoComponent {
   errorMessage: string = '';  // Variable para manejar los errores
   isLoading: boolean = false; // Control de estado de carga
 
-  constructor(private sevicesService: CatalogosService) {}
+  constructor(private sevicesService: CatalogosService, private authService: AuthService, private router: Router) {}
 
+
+  logout() {
+    this.authService.logout(); // Llama al método de logout
+    this.router.navigate(['/']); // Redirige al login
+  }
   // Método para crear un nuevo catálogo
   crearCatalogo(): void {
     if (this.nuevoCatalogo.nombre && this.nuevoCatalogo.tipo && this.nuevoCatalogo.descripcion && this.nuevoCatalogo.imagen) {

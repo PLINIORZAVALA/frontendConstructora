@@ -2,6 +2,10 @@
 <div *ngIf="errorMessage" class="error">
   <p>{{ errorMessage }}</p>
 </div>
+<div>
+  <h1>Bienvenido al Dashboard</h1>
+  <button (click)="logout()">Cerrar Sesión</button>
+</div>
 
 <!-- Formulario para crear un nuevo catálogo -->
 <div class="form-container">
